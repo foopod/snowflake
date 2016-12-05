@@ -1,18 +1,24 @@
 var ctx;
 var canvas;
 
+var ratio;
+
 var shapes = ['square', 'circle', 'triangle'];
 
 function init(){
     canvas = document.getElementById('app');
 	ctx = canvas.getContext('2d');
     resizeCanvas();
+    ctx.fillStyle='#CCEEFF';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ratio = canvas.width/1100;
+    console.log(canvas.width);
     buildSnowflake(Math.random());
 }
 
 function buildSnowflake(seed){
     Math.seedrandom(seed);
-    var numShapes = Math.random()*20 + 2;
+    var numShapes = Math.random()*8 + 2;
     console.log(numShapes);
     
     for(var i = 0; i < numShapes; i++){
@@ -22,9 +28,9 @@ function buildSnowflake(seed){
 }
 
 function drawShapes(shape){
-    var xOffset = Math.random()*300;
+    var xOffset = (Math.random()*300) * ratio;
     var yOffset = 0;
-    var size = Math.random()*100 + 20;
+    var size = (Math.random()*100 + 20) * ratio;
     for(var i = 0; i < 6; i++){
         if(shape == 'square'){ 
             drawRotatedRect(-size/2 + xOffset,-size/2 + yOffset,size,size,i*60);
